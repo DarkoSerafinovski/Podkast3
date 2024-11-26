@@ -1,0 +1,58 @@
+.korisnici-page {
+    background-color: #f9f9f9;
+  }
+  
+  .korisnici-container {
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .korisnici-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .korisnici-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .korisnici-table th,
+  .korisnici-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .korisnici-table th {
+    background-color: #f4f4f4;
+    color: #555;
+  }
+  
+  .korisnici-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  
+  .delete-btn:hover {
+    background-color: #cc0000;
+  }
+  

@@ -1,0 +1,156 @@
+.podcast-details {
+    background: #f8f9fa;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    
+  }
+  
+  .podcast-details-info {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .podcast-details-banner {
+    max-width: 80%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    height: auto;
+  }
+  
+  .podcast-details-title {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .podcast-details-category,
+  .podcast-details-description {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  .podcast-actions {
+    display: flex;
+    gap: 15px;
+    margin: 20px auto;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  
+  
+  .delete-podcast-btn {
+    background-color: #f44336 !important;
+    color: white;
+  }
+  
+  .delete-podcast-btn:hover {
+    background-color: #e53935 !important;
+  }
+  
+  
+  .episodes-list {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .episode-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .episode-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .episode-card h3 {
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+    color: #007bff;
+  }
+  
+  .episode-card p {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .btn {
+    background: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background: #0056b3;
+  }
+  /* Akcije za podkast */
+.podcast-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Razmak između dugmadi */
+  margin-top: 20px;
+}
+
+/* Stil dugmeta */
+.btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #4caf50; /* Zelena boja */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+/* Dugme za omiljene */
+.favorite-btn {
+  background-color: #ff9800; /* Narandžasta boja */
+}
+
+.favorite-btn.favorite-added {
+  background-color: #f44336; /* Crvena boja kada je dodato u omiljene */
+}
+
+.favorite-btn:hover {
+  background-color: #e67e22;
+}
+
+.favorite-btn.favorite-added:hover {
+  background-color: #d32f2f;
+}
+
+/* Dugme za brisanje */
+.delete-podcast-btn {
+  background-color: #f44336; /* Crvena boja */
+}
+
+.delete-podcast-btn:hover {
+  background-color: #d32f2f;
+}

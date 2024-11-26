@@ -1,0 +1,89 @@
+/* Pozadina stranice */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #e0f7fa, #fce4ec);
+  }
+  
+  /* Glavni okvir forme */
+  .login-box {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Naslov */
+  .login-title {
+    font-size: 1.8rem;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  /* Stilovi za label i input polja */
+  .form-group {
+    margin-bottom: 1.2rem;
+    text-align: left;
+  }
+  
+  .form-label {
+    font-size: 1rem;
+    font-family: 'Arial', sans-serif;
+    color: #666;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-input:focus {
+    outline: none;
+    border-color: #80cbc4;
+    box-shadow: 0 0 5px rgba(128, 203, 196, 0.5);
+  }
+  
+  /* Dugme za prijavu */
+  .login-button {
+    background: #80cbc4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  
+  .login-button:hover {
+    background: #4db6ac;
+  }
+  
+  /* Link za registraciju */
+  .register-link {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .register-link a {
+    color: #80cbc4;
+    text-decoration: none;
+  }
+  
+  .register-link a:hover {
+    text-decoration: underline;
+  }
+  

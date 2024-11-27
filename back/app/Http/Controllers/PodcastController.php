@@ -20,12 +20,17 @@ class PodcastController extends Controller
         $perPage = $request->input('per_page', 10); 
         $idCategory = $request->input('category_id'); 
         $favorites = $request->input('favorites'); 
-    
+        Log::info($favorites);
+     
+      
         try {
             
-            if ($favorites && Auth::user()) {
+            if ($favorites) {
+              
                 $user = Auth::user();
+                
                 $podkastiQuery = $user->myFavoritePodcasts();
+              
             } else {
                 $podkastiQuery = Podcast::query();
             }
@@ -126,12 +131,12 @@ class PodcastController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'category_id' => $request->category_id,
-            'banner' => $this->uploadBanner($request->file('banner'), $request->title),
+            'banner' => $this->uploadBanner($request->file('banner'), $request->title,null),
 
         ]);
 
         $creators = collect($request->creators)->pluck('id');
-        $podcast->autori()->sync($creators);
+        $podcast->creators()->sync($creators);
 
        
         return response()->json([
@@ -147,8 +152,17 @@ class PodcastController extends Controller
 }
 
 // Funkcija za upload logotipa
-private function uploadBanner($file, $title)
+private function uploadBanner($file, $title,$podcast)
 {
+    if($podcast && $podcast->title!=$title){
+        Log::info('alooo');
+        $putanjaBanera = public_path($podcast->banner);
+        $direktorijum = dirname($putanjaBanera);
+        if (File::exists($direktorijum)) {
+            File::deleteDirectory($direktorijum);
+        }
+    }
+
     // Sanitizovanje naziva za ime fajla
     $sanitizedtitle = preg_replace('/[^a-zA-Z0-9_-]/', '_', $title);
     $extension = $file->getClientOriginalExtension();
@@ -186,7 +200,7 @@ public function update(Request $request, $podcastId)
         $podcast = Podcast::findOrFail($podcastId);
 
         // Ažuriraj osnovne podatke
-        $podcast->title = $request->title;
+       
         $podcast->description = $request->description;
         $podcast->category_id = $request->category_id;
 
@@ -194,11 +208,11 @@ public function update(Request $request, $podcastId)
             if (File::exists($podcast->banner)) {
                 File::delete($podcast->banner);
             }
-           $podcast->banner =  $this->uploadBanner($request->file('banner'), $request->title);
+           $podcast->banner =  $this->uploadBanner($request->file('banner'), $request->title,$podcast);
 
         }
 
-       
+        $podcast->title = $request->title;
         $podcast->save();
 
         return response()->json([

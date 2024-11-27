@@ -83,7 +83,7 @@
     }
 
 
-    public function update(Request $request,$id){
+    public function updateProfilePicture(Request $request,$id){
         try{
             $request->validate([
                  'profile_picture'=> 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'

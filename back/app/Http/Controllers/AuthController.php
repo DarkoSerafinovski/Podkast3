@@ -14,22 +14,34 @@ class AuthController extends Controller
     public function register(Request $reqest)
     {
         $validator = Validator::make($reqest->all(),[
-            'username' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'role' => 'required|string|in:creator,viewer'
+            'role' => 'required|string|in:creator,viewer',
+            'profile_picture'=> 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
  
         if($validator->fails()){
             return response()->json(['success'=> false, 'data'=> $validator->errors()]);
         }
- 
+
         $user = User::create([
             'username'=> $reqest->username,
             'email'=> $reqest->email,
             'password'=> Hash::make($reqest->password),
-            'role'=> $reqest->role
+            'role'=> $reqest->role,
+            'profile_picture'=>null
         ]);
+
+
+        if($request->hasFile('profile_picture')){
+          
+           $user->profile_picture =  $this->uploadProfile($request->file('profile_picture'), $request->username);
+        }
+        $user->save();
+        
+ 
+        
  
         $token = $user->createToken('auth_token')->plainTextToken;
  
@@ -57,4 +69,20 @@ class AuthController extends Controller
        $request->user()->tokens()->delete();
        return response()->json(['message'=> 'Successfully logged out!']);
     }
+
+
+
+    private function uploadProfile($file, $username)
+{
+    $sanitizedusername = preg_replace('/[^a-zA-Z0-9_-]/', '_', $username);
+    $extension = $file->getClientOriginalExtension();
+    $filename = $sanitizedusername . '.' . $extension;
+
+    $path = 'public/app/' . $sanitizedusername;
+    if (!Storage::exists($path)) {
+        Storage::makeDirectory($path);
+    }
+    $pathFile = $file->storeAs($path, $filename);
+    return Storage::url($pathFile);
+}
 }

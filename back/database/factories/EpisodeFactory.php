@@ -3,12 +3,12 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Epizode;
+use App\Models\Episode;
 use App\Models\Podcast;
 
-class EpizodeFactory extends Factory
+class EpisodeFactory extends Factory
 {
-    protected $model = Epizode::class;
+    protected $model = Episode::class;
 
     public function definition()
     {

@@ -3,12 +3,12 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Epizode;
+use App\Models\Episode;
 
-class EpizodeSeeder extends Seeder
+class EpisodeSeeder extends Seeder
 {
     public function run()
     {
-        Epizode::factory()->count(45)->create();
+        Episode::factory()->count(45)->create();
     }
 }

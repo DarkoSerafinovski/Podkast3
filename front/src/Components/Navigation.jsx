@@ -6,7 +6,7 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   // Uloga korisnika iz sessionStorage
-  const role = sessionStorage.getItem("userRole") || "admin";
+  const role = sessionStorage.getItem("userRole") || "viewer";
 
   // Funkcija za logout
   const handleLogout = () => {

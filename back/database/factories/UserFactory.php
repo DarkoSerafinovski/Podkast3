@@ -17,6 +17,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'password' => Hash::make('password'), 
             'role' => $this->faker->randomElement(['admin', 'viewer', 'creator']),
+            'profile_picture'=>$this->faker->imageUrl(640, 480, 'people', true)
         ];
     }
 }

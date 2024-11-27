@@ -10,7 +10,7 @@ class Epizode extends Model
     use HasFactory;
 
 
-    protected $table = 'epizodes';
+    protected $table = 'episodes';
     use HasFactory;
 
     protected $fillable = ['title', 'date','type','file', 'podcast_id'];

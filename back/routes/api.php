@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PodcastController;
+use App\Http\Controllers\EpisodeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,3 +27,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 
 
 Route::get('/podcasts',[PodcastController::class,'index']);
+
+
+Route::get('/epizodes/file/{id}', [EpisodeController::class, 'getFile'])->name('epizode.file');

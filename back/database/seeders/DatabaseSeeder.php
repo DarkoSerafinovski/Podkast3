@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             UserSeeder::class,
             PodcastSeeder::class,
-            EpizodeSeeder::class,
+            EpisodeSeeder::class,
         ]);
     }
 }

@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Epizode extends Model
+{
+    use HasFactory;
+
+
+    protected $table = 'epizodes';
+    use HasFactory;
+
+    protected $fillable = ['title', 'date','type','file', 'podcast_id'];
+
+    public function podcast()
+    {
+        return $this->belongsTo(Podcast::class);
+    }
+
+  
+    protected $casts = [
+        'date' => 'datetime', 
+    ];
+}

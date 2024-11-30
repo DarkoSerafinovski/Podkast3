@@ -1,0 +1,200 @@
+/* Center the main content vertically and horizontally */
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f7f9fb;
+  font-family: Arial, sans-serif;
+  padding: 20px; /* Dodato da ima prostora na manjim ekranima */
+  box-sizing: border-box;
+}
+
+/* Style for the search bar */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* Dodato da se lepo slaže na manjim ekranima */
+}
+
+.search-bar input {
+  padding: 15px;
+  width: 400px;
+  border-radius: 30px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  font-size: 18px;
+  box-sizing: border-box;
+}
+
+.search-bar button {
+  padding: 15px 30px;
+  background-color: #1db954;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background-color: #1ed760;
+}
+
+/* Center the artist list */
+.artist-list {
+  display: flex;
+  flex-wrap: wrap; /* Dodato da se artisti slažu u redove */
+  justify-content: center;
+  gap: 15px;
+  padding: 10px;
+}
+
+/* Artist cards with rounded corners */
+.artist-card {
+  width: 150px;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.artist-card:hover {
+  transform: scale(1.05);
+}
+
+/* Style for the artist image */
+.artist-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* Artist details container styling */
+.artist-details-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Artist's image in details view */
+.artist-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+/* Styling for songs in green rectangle */
+.song-list {
+  display: flex; /* Aktivira Flexbox */
+  flex-direction: row; /* Eksplicitno definiše horizontalno poravnanje */
+  flex-wrap: wrap; /* Omogućava prelamanje u novi red ako nema dovoljno prostora */
+  justify-content: center; /* Poravnava pesme horizontalno u centru */
+  align-items: center; /* Poravnava pesme vertikalno */
+  gap: 20px; /* Razmak između pesama */
+  margin-top: 20px; /* Razmak od gornjeg dela stranice */
+  padding: 10px;
+  max-width: 1200px; /* Maksimalna širina kontejnera */
+  width: 100%; /* Puni dostupnu širinu */
+  box-sizing: border-box; /* Uključuje padding u širinu */
+}
+
+
+.song-card {
+  background-color: #1db954;
+  color: white;
+  padding: 15px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  box-sizing: border-box;
+}
+
+.song-card:hover {
+  background-color: #1ed760;
+  transform: scale(1.03);
+}
+
+.song-card p {
+  margin: 0;
+  font-size: 16px;
+  flex: 1; /* Pruži tekst da se prilagodi */
+}
+
+.song-card audio {
+  margin-left: 15px;
+  flex-shrink: 0;
+}
+
+/* Pagination styling */
+.pagination {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  background-color: #1db954;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination .active {
+  font-weight: bold;
+  background-color: #1ed760;
+}
+
+/* New additions for responsive design */
+@media (max-width: 768px) {
+  .search-bar input {
+    width: 100%; /* Da zauzme ceo prostor na mobilnim uređajima */
+    margin-bottom: 10px;
+  }
+
+  .search-bar button {
+    width: 100%;
+  }
+
+  .artist-card {
+    width: 120px; /* Smanjeni artisti za manje ekrane */
+  }
+
+  .song-card {
+    width: 100%; /* Pesme će zauzeti ceo red na manjim ekranima */
+  }
+}
+
+@media (max-width: 480px) {
+  .search-bar {
+    flex-direction: column; /* Potpuno vertikalno na najsitnijim ekranima */
+  }
+
+  .artist-card {
+    width: 100px;
+  }
+
+  .song-card {
+    padding: 10px;
+    font-size: 14px;
+  }
+}

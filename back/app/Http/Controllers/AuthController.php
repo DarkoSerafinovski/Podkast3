@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
  
 class AuthController extends Controller
 {
-    public function register(Request $reqest)
+    public function register(Request $request)
     {
-        $validator = Validator::make($reqest->all(),[
+        $validator = Validator::make($request->all(),[
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
@@ -26,10 +27,10 @@ class AuthController extends Controller
         }
 
         $user = User::create([
-            'username'=> $reqest->username,
-            'email'=> $reqest->email,
-            'password'=> Hash::make($reqest->password),
-            'role'=> $reqest->role,
+            'username'=> $request->username,
+            'email'=> $request->email,
+            'password'=> Hash::make($request->password),
+            'role'=> $request->role,
             'profile_picture'=>null
         ]);
 

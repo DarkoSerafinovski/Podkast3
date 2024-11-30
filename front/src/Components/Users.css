@@ -37,6 +37,22 @@
   .korisnici-table tr:hover {
     background-color: #f1f1f1;
   }
+
+
+  .korisnici-table tr {
+    transition: background-color 0.3s ease;
+  }
+  
+  .korisnici-table tr.creator {
+    background-color: #82bdd8; /* Svetlo plava za kreatore */
+    color: rgb(43, 42, 42); /* Tekst belo */
+  }
+  
+  .korisnici-table tr.viewer {
+    background-color: #00254a; /* Tamno plava za gledaoce */
+    color: white; /* Tekst belo */
+  }
+
   
   .btn {
     padding: 8px 12px;

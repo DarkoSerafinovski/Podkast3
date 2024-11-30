@@ -58,7 +58,7 @@ class EpisodeController extends Controller
             Log::info('Request Data:', $request->all());
         $request->validate([
             'title' => 'required|string',
-            'podcast_id' => 'required|exists:podkasti,id',
+            'podcast_id' => 'required|exists:podcasts,id',
           
         ]);
     

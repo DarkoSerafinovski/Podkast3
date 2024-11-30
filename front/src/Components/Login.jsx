@@ -1,15 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Login.css';
 
 const Login = () => {
+  const [userData, setUserData] = useState({
+    email: '',
+    password: '',
+  });
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  // Funkcija za proveru kredencijala (trenutno samo navigacija)
-  const handleLogin = (event) => {
-    event.preventDefault();
-    // Kasnije dodaj logiku za proveru kredencijala
-    navigate('/podkasti'); // Preusmeravanje na stranicu "Podkasti"
+  // Rukovanje unosom
+  const handleInput = (e) => {
+    const newUserData = { ...userData };
+    newUserData[e.target.name] = e.target.value;
+    setUserData(newUserData);
+  };
+
+  // Rukovanje prijavom
+  const handleLogin = (e) => {
+    e.preventDefault();
+    axios
+      .post('http://127.0.0.1:8000/api/login', userData)
+      .then((response) => {
+        if (response.data.success === true) {
+          window.sessionStorage.setItem('auth_token', response.data.access_token);
+          window.sessionStorage.setItem('role', response.data.role);
+          window.sessionStorage.setItem('user_id', response.data.data.id);
+
+          navigate('/podkasti');
+        } else {
+          setErrorMessage('Pogrešan email ili lozinka.');
+        }
+      })
+      .catch((error) => {
+        console.error('Greška pri prijavi:', error);
+        setErrorMessage('Došlo je do greške. Molimo pokušajte ponovo.');
+      });
   };
 
   return (
@@ -22,8 +50,11 @@ const Login = () => {
             <input
               type="email"
               id="email"
+              name="email"
               className="form-input"
               placeholder="Unesite vaš email"
+              value={userData.email}
+              onChange={handleInput}
               required
             />
           </div>
@@ -32,12 +63,16 @@ const Login = () => {
             <input
               type="password"
               id="password"
+              name="password"
               className="form-input"
               placeholder="Unesite vašu šifru"
+              value={userData.password}
+              onChange={handleInput}
               required
             />
           </div>
           <button type="submit" className="login-button">Prijavi se</button>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </form>
         <p className="register-link">
           Novi ste? <a href="/registracija">Registrujte se ovde</a>

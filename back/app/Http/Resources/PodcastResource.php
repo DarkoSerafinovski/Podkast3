@@ -22,9 +22,9 @@ class PodcastResource extends JsonResource
             'description' => $this->description,
             'banner' => asset($this->banner),
             'category'=>new CategoryResource($this->category),
-            'epizodes'=>EpisodeResource::collection($sortEpisode),
+            'episodes'=>EpisodeResource::collection($sortEpisode),
             'creators' => UserResource::collection($this->creators),
-            'favorites'=> $user ? $user->myFavoritePodcasts->contains($this->id) : false,
+            'favorite'=> $user ? $user->myFavoritePodcasts->contains($this->id) : false,
         ];
     }
 }

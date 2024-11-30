@@ -185,46 +185,6 @@ private function uploadBanner($file, $title,$podcast)
 
 
 
-public function update(Request $request, $podcastId)
-{
-    // Validacija podataka
-    try {
-        $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
-            'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',  
-        ]);
-
-        // Pronađi podcast
-        $podcast = Podcast::findOrFail($podcastId);
-
-        // Ažuriraj osnovne podatke
-       
-        $podcast->description = $request->description;
-        $podcast->category_id = $request->category_id;
-
-        if ($request->hasFile('banner')) {
-            if (File::exists($podcast->banner)) {
-                File::delete($podcast->banner);
-            }
-           $podcast->banner =  $this->uploadBanner($request->file('banner'), $request->title,$podcast);
-
-        }
-
-        $podcast->title = $request->title;
-        $podcast->save();
-
-        return response()->json([
-            'message' => 'The podcast has been successfully updated!'
-        ], 200);
-
-    } catch (\Exception $e) {
-        return response()->json([
-            'message' => 'An error occurred while updating the podcast.' . $e->getMessage()
-        ], 500);
-    }
-}
 }
 
     

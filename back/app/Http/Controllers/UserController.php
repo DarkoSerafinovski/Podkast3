@@ -9,7 +9,8 @@
  use Illuminate\Support\Facades\Auth;
  use Illuminate\Support\Facades\Log;
  use App\Models\Podcast;
- 
+ use Illuminate\Support\Facades\File;
+ use Illuminate\Support\Facades\Storage;
  class UserController extends Controller
  {
      
@@ -30,6 +31,24 @@
                 'error' => $e->getMessage()
             ], 500); 
         }
+    }
+
+
+    public function creators(Request $request){
+       
+        try {
+           
+            $users = User::where('role','creator')->get();
+            return UserResource::collection($users);
+    
+        } catch (\Exception $e) {
+            // Rukovanje greškom
+            return response()->json([
+                'message' => 'An error occurred while loading the user.',
+                'error' => $e->getMessage()
+            ], 500); 
+        }
+    
     }
     
 
@@ -65,15 +84,15 @@
    
 
 
-    public function myPodcasts(Request $request)
+    public function creatorPodcasts(Request $request)
     {
+       
         try{
-            $perPage = $request->input('per_page', 10); 
+            $perPage = $request->input('per_page', 5); 
             $user = Auth::user();
             $podcasts = $user->myPodcasts()->paginate($perPage);
             return PodcastResource::collection($podcasts);
         }catch (\Exception $e) {
-            // Rukovanje greškom
             return response()->json([
                 'message' => 'An error occurred while fetching the podcast.',
                 'error' => $e->getMessage(),
@@ -83,14 +102,14 @@
     }
 
 
-    public function updateProfilePicture(Request $request,$id){
+    public function updateProfilePicture(Request $request){
         try{
             $request->validate([
                  'profile_picture'=> 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
             if($request->hasFile('profile_picture')){
 
-                $user = User::findOrFail($id);
+               $user = Auth::user();
                 if (File::exists($user->profile_picture)) {
                     File::delete($user->profile_picture);
                 }
@@ -166,6 +185,16 @@
     }
     $pathFile = $file->storeAs($path, $filename);
     return Storage::url($pathFile);
+}
+
+
+public function show($id){
+    try{
+        $user = User::findOrFail($id);
+        return new UserResource($user);
+    }catch (\Exception $e) {
+            return response()->json(['message' => 'An error occurred while fetching the user.','error'=> $e->getMessage()], 500);
+        }
 }
 
      

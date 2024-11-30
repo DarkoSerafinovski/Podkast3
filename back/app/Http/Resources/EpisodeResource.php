@@ -19,7 +19,7 @@ class EpisodeResource extends JsonResource
             'title' => $this->title,
             'date' => $this->date->toIso8601String(),
             'type'=>$this->type,
-            'file' => route('epizode.file', ['id' => $this->id]),
+            'file' => route('episode.file', ['id' => $this->id]),
         ];
     }
 }

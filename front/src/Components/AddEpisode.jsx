@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 import Navigation from './Navigation';
 import './AddEpisode.css';
 
 const AddEpisode = () => {
   const navigate = useNavigate();
   const { podcastId } = useParams(); // ID podkasta iz URL-a
-
   const [formData, setFormData] = useState({
     title: '',
     description: '',
   });
   const [file, setFile] = useState(null);
+  const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,25 +20,42 @@ const AddEpisode = () => {
   };
 
   const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
+    setFile(e.target.files[0]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!file) {
-      alert('Molimo vas da učitate video ili audio fajl.');
+
+    // Validacija ako je potrebno
+    if (!formData.title || !formData.description || !file) {
+      setMessage('Sva polja su obavezna.');
       return;
     }
 
-    console.log('New Episode:', {
-      podcastId,
-      ...formData,
-      file,
-    });
+    const requestData = new FormData();
+    requestData.append('title', formData.title);
+    requestData.append('description', formData.description);
+    requestData.append('file', file);
+    requestData.append('podcast_id', podcastId); // ID podkasta iz URL-a
 
-    alert('Epizoda uspešno dodata!');
-    navigate(`/podcast/${podcastId}`); // Vrati korisnika na stranicu detalja podkasta
+    try {
+      const response = await axios.post('http://localhost:8000/api/episodes', requestData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${window.sessionStorage.getItem('auth_token')}`,
+        },
+      });
+
+      setMessage('Epizoda uspešno dodata!');
+      setFormData({ title: '', description: '' });
+      setFile(null);
+
+      
+      navigate(`/podcast/${podcastId}`);
+    } catch (error) {
+      console.error('Greška prilikom dodavanja epizode:', error);
+      setMessage('Došlo je do greške pri dodavanju epizode.');
+    }
   };
 
   return (
@@ -45,6 +63,7 @@ const AddEpisode = () => {
       <Navigation />
       <div className="form-container">
         <h2>Dodaj Novu Epizodu</h2>
+        {message && <p className="message">{message}</p>}
         <form onSubmit={handleSubmit}>
           <label>Naziv Epizode</label>
           <input
@@ -64,7 +83,7 @@ const AddEpisode = () => {
           <label>Učitaj Video ili Audio</label>
           <input
             type="file"
-            accept="audio/*,video/*"
+            accept=".mp4, .mp3"
             onChange={handleFileChange}
             required
           />

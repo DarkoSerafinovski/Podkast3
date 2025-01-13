@@ -79,38 +79,33 @@
   margin-bottom: 10px;
 }
 
-/* Artist details container styling */
-.artist-details-container {
-  margin-top: 20px;
+/* Artist Details Page */
+.artist-details {
+  background-color: #f7f9fb;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
 }
 
-/* Artist's image in details view */
-.artist-photo {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
+/* Artist name styling */
+.artist-details h2 {
+  font-size: 28px;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 
-/* Styling for songs in green rectangle */
-.song-list {
-  display: flex; /* Aktivira Flexbox */
-  flex-direction: row; /* Eksplicitno definiše horizontalno poravnanje */
-  flex-wrap: wrap; /* Omogućava prelamanje u novi red ako nema dovoljno prostora */
-  justify-content: center; /* Poravnava pesme horizontalno u centru */
-  align-items: center; /* Poravnava pesme vertikalno */
-  gap: 20px; /* Razmak između pesama */
-  margin-top: 20px; /* Razmak od gornjeg dela stranice */
-  padding: 10px;
-  max-width: 1200px; /* Maksimalna širina kontejnera */
-  width: 100%; /* Puni dostupnu širinu */
-  box-sizing: border-box; /* Uključuje padding u širinu */
+/* Songs List styling */
+.songs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 30px;
 }
-
 
 .song-card {
   background-color: #1db954;
@@ -118,10 +113,9 @@
   padding: 15px;
   border-radius: 15px;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 300px;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
   cursor: pointer;
   transition: background-color 0.2s, transform 0.2s;
   box-sizing: border-box;
@@ -132,22 +126,18 @@
   transform: scale(1.03);
 }
 
-.song-card p {
-  margin: 0;
-  font-size: 16px;
-  flex: 1; /* Pruži tekst da se prilagodi */
-}
-
-.song-card audio {
-  margin-left: 15px;
-  flex-shrink: 0;
+.song-card iframe {
+  border-radius: 8px;
+  width: 100%;
+  height: 80px;
+  border: none;
 }
 
 /* Pagination styling */
 .pagination {
   display: flex;
   gap: 10px;
-  margin-top: 20px;
+  align-items: center;
 }
 
 .pagination button {
@@ -159,42 +149,34 @@
   cursor: pointer;
 }
 
-.pagination .active {
-  font-weight: bold;
-  background-color: #1ed760;
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
-/* New additions for responsive design */
+.pagination span {
+  font-size: 16px;
+}
+
+/* Responsive styling */
 @media (max-width: 768px) {
-  .search-bar input {
-    width: 100%; /* Da zauzme ceo prostor na mobilnim uređajima */
-    margin-bottom: 10px;
-  }
-
-  .search-bar button {
-    width: 100%;
-  }
-
-  .artist-card {
-    width: 120px; /* Smanjeni artisti za manje ekrane */
-  }
-
   .song-card {
-    width: 100%; /* Pesme će zauzeti ceo red na manjim ekranima */
+    width: 100%; /* Pesme zauzimaju ceo prostor na manjim ekranima */
+  }
+
+  .pagination {
+    flex-direction: column;
+    align-items: center;
   }
 }
 
 @media (max-width: 480px) {
-  .search-bar {
-    flex-direction: column; /* Potpuno vertikalno na najsitnijim ekranima */
+  .artist-details h2 {
+    font-size: 24px;
   }
 
-  .artist-card {
-    width: 100px;
-  }
-
-  .song-card {
-    padding: 10px;
-    font-size: 14px;
+  .song-card iframe {
+    height: 70px; /* Manja visina iframe-a na manjim ekranima */
   }
 }
+

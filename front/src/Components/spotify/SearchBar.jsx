@@ -5,6 +5,7 @@ const SearchBar = ({ onSearch }) => {
 
   const handleSearch = () => {
     if (query) {
+      console.log(query);
       onSearch(query);
     }
   };
